@@ -8,7 +8,7 @@
 - iTerm2 2.1.4
 
 ## イメージ
-![image1](https://raw.github.com/wiki/kawakawaritsuki/dotfiles/image/image1.png)
+![image1](https://raw.githubusercontent.com/KawakawaRitsuki/dotfiles/master/image/image1.png)
 
 ## 導入
 install.shを実行すれば導入が可能です。   

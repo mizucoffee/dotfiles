@@ -11,3 +11,9 @@ sudo chmod 755 /usr/local/bin/battery
 
 cp .zshrc ~/.zshrc
 cp .tmux.conf ~/.tmux.conf
+
+if [ -e /usr/local/bin/zsh ]; then
+  chsh -s /usr/local/bin/zsh
+else
+  chsh -s /bin/zsh
+fi

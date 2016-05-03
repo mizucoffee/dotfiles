@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export ZPLUG_HOME=".zplug"
 curl -sL git.io/zplug | zsh
 
 sudo cp bin/wifi /usr/local/bin/wifi

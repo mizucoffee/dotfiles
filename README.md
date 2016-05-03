@@ -11,8 +11,10 @@
 ![image1](https://raw.githubusercontent.com/KawakawaRitsuki/dotfiles/master/image/image1.png)
 
 ## 導入
-install.shを実行すれば導入が可能です。   
-install.shを実行したあとは、一度再起動することをおすすめします（反映のため）。
+
+```
+bash -c "$(curl -fsSL git.io/kpzsh)"
+```
 
 # License
 MIT LICENSE

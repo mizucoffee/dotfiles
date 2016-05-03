@@ -1,0 +1,28 @@
+#!/bin/bash
+#参考にさせていただいたもの:https://github.com/b4b4r07/dotfiles/blob/master/bin/wifi
+
+airport_path="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
+
+info=( $(eval "$airport_path" --getinfo | grep -E "^ *(agrCtlRSSI|state|lastTxRate|SSID):" | awk '{print $2}') )
+if [[ ${#info[@]} -eq 0 ]] ; then
+    echo "Offline"
+    exit 1
+fi
+
+rssi="${info[0]}"
+ssid="${info[3]}"
+
+if test $rssi -ge -50 ; then
+    signal="#[fg=colour034]▃▅▇#[default]"
+elif test $rssi -ge -80 ; then
+    signal="#[fg=colour178]▃▅ #[defalut]"
+else
+    signal="#[fg=red]▃  #[default]"
+fi
+
+if [ "${info[3]}" = 0 ]; then
+    echo "No Wifi"
+    exit 1
+fi
+
+echo "SSID:${ssid} ${signal}"

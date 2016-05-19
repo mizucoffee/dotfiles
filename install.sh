@@ -1,10 +1,7 @@
 #!/bin/bash
 
-export ZPLUG_HOME=".zplug"
-curl -sL git.io/zplug | zsh
-
 sudo cp bin/wifi /usr/local/bin/wifi
-sudo cp bin/battery /usr/local/bin/battry
+sudo cp bin/battery /usr/local/bin/battery
 sudo cp bin/getgip /usr/local/bin/getgip
 sudo cp bin/getlip /usr/local/bin/getlip
 
@@ -21,3 +18,8 @@ if [ -e /usr/local/bin/zsh ]; then
 else
   chsh -s /bin/zsh
 fi
+
+
+cd ~/
+export ZPLUG_HOME=".zplug"
+curl -sL git.io/zplug | zsh

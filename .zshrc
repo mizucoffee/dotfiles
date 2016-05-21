@@ -8,9 +8,7 @@ echo " /_/  \_\/_/"
 
 export CLICOLOR=1
 export PATH="/usr/local/sbin:$PATH"
-export ZPLUG_HOME=".zplug"
-
-source ~/.zplug/zplug
+source ~/.enhancd/enhancd.sh
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
@@ -88,18 +86,5 @@ setopt hist_reduce_blanks
 setopt extended_glob
 setopt correct
 setopt prompt_subst
-
-########################################
-#--------------- Zplug ----------------#
-########################################
-
-zplug "b4b4r07/enhancd", use:enhancd.sh
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
 
 ########################################

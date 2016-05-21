@@ -19,7 +19,8 @@ else
   chsh -s /bin/zsh
 fi
 
-
 cd ~/
-export ZPLUG_HOME=".zplug"
-curl -sL git.io/zplug | zsh
+
+git clone https://github.com/b4b4r07/enhancd
+mv enhancd .enhancd
+

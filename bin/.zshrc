@@ -7,7 +7,8 @@ echo "  / /\ \  / _____/"
 echo " /_/  \_\/_/"
 
 export CLICOLOR=1
-export PATH="/usr/local/sbin:$PATH"
+export TERM=xterm-256color
+export PATH=":/usr/local/sbin:$PATH"
 source ~/.enhancd/enhancd.sh
 
 HISTFILE=~/.zsh_history
@@ -44,8 +45,9 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 zstyle ':vcs_info:*' formats '[%F{green}%b%f]'
 zstyle ':vcs_info:*' actionformats '[%F{green}%b%f(%F{red}%a%f)]'
-PROMPT='%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-\$ '
+
+PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+%(?.%{${fg[blue]}%}.%{${fg[red]}%})\$%{${reset_color}%} "
 
 ########################################
 #---------------- 関数 ----------------#
@@ -58,10 +60,26 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 
 function gip() {
-    ~/Documents/Development/MyProjects/Other/GitPeco/GitPeco.sh
+    ~/Documents/GitPeco/GitPeco.sh
 }
 alias 'gip'
 
+function s(){
+    if [ $# -eq 0 ]; then
+        cat > /tmp/tmux.tmp && tmux split-window "less /tmp/tmux.tmp"
+    else
+        REATTACH_TO_USER_NAMESPACE=`whence reattach-to-user-namespace`
+        tmux split-window "$REATTACH_TO_USER_NAMESPACE $*"
+    fi
+}
+function v(){
+    if [ $# -eq 0 ]; then
+        cat > /tmp/tmux.tmp && tmux split-window -h "less /tmp/tmux.tmp"
+    else
+        REATTACH_TO_USER_NAMESPACE=`whence reattach-to-user-namespace`
+        tmux split-window -h "$REATTACH_TO_USER_NAMESPACE $*"
+    fi
+}
 ########################################
 #------------- エイリアス -------------#
 ########################################
@@ -69,6 +87,7 @@ alias 'gip'
 alias sshot=$ANDROID_SDK"/tools/screenshot2 ~/Desktop/screenshot.png; open ~/Desktop/screenshot.png";
 alias uninstallapp='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
 alias ls='ls -G -F'
+alias la='ls -a'
 
 ########################################
 #------------- オプション -------------#
@@ -88,3 +107,22 @@ setopt correct
 setopt prompt_subst
 
 ########################################
+
+if [[ ! -n $TMUX ]]; then
+  # get the IDs
+  ID="`tmux list-sessions`"
+  if [[ -z "$ID" ]]; then
+    tmux new-session && exit
+  fi
+  create_new_session="Create New Session"
+  ID="$ID\n${create_new_session}:"
+  ID="`echo $ID | peco | cut -d: -f1`"
+  if [[ "$ID" = "${create_new_session}" ]]; then
+    tmux new-session && exit
+  elif [[ -n "$ID" ]]; then
+    tmux attach-session -t "$ID" && exit
+  else
+    :  # Start terminal normally
+  fi
+fi
+

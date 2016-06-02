@@ -10,8 +10,8 @@ sudo chmod 755 /usr/local/bin/battery
 sudo chmod 755 /usr/local/bin/getgip
 sudo chmod 755 /usr/local/bin/getlip
 
-cp .zshrc ~/.zshrc
-cp .tmux.conf ~/.tmux.conf
+cp bin/.zshrc ~/.zshrc
+cp bin/.tmux.conf ~/.tmux.conf
 
 if [ -e /usr/local/bin/zsh ]; then
   chsh -s /usr/local/bin/zsh

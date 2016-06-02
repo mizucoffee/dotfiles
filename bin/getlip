@@ -1,7 +1,7 @@
 A=`ifconfig|grep inet|grep -v inet6|grep -v 127.0.0.1|sed -e 's/.*inet //g'|sed -e 's/ .*//'`
 
 if [ -n "$A" ]; then
-   echo "#[bg=colour024]#[fg=colour255] L:$A #[default]"
+   echo "#[bg=colour003]#[fg=colour000] L:$A #[default]"
 else
    echo ""
    exit 1

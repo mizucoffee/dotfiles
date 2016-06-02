@@ -1,5 +1,4 @@
 #!/bin/bash
-#参考にさせていただいたもの:https://github.com/b4b4r07/dotfiles/blob/master/bin/wifi
 
 airport_path="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
 
@@ -13,11 +12,11 @@ rssi="${info[0]}"
 ssid="${info[3]}"
 
 if test $rssi -ge -50 ; then
-    signal="#[fg=colour034]▃▅▇#[default]"
+    signal="#[fg=colour002]▃▅▇"
 elif test $rssi -ge -80 ; then
-    signal="#[fg=colour178]▃▅ #[defalut]"
+    signal="#[fg=colour003]▃▅ "
 else
-    signal="#[fg=red]▃  #[default]"
+    signal="#[fg=colour001]▃  "
 fi
 
 if [ "${info[3]}" = 0 ]; then
@@ -25,4 +24,4 @@ if [ "${info[3]}" = 0 ]; then
     exit 1
 fi
 
-echo "SSID:${ssid} ${signal}"
+echo "SSID:${ssid} ${signal}#[default]"

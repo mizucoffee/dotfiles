@@ -1,5 +1,4 @@
 #!/bin/zsh
-#参考にさせていただいたもの:https://github.com/b4b4r07/dotfiles/blob/master/bin/battery
 
 percent=`pmset -g ps | grep -o '[0-9]\+%' | tr -d '%'`
 pmset -g ps | grep -E "Battery Power|charged" >/dev/null 2>&1
@@ -9,17 +8,17 @@ if [ $? -eq 0  ]; then
   
   if [ -z "$time" ]; then
     if [ $percent -le 20 ] ; then
-      echo -e "#[bg=colour196]#[fg=colour015] ${percent}% #[default]"
+      echo -e "#[bg=colour001] ${percent}% #[default]"
     else
-      echo -e "#[bg=colour027]#[fg=colour015] ${percent}% #[default]"
+      echo -e "#[bg=colour004] ${percent}% #[default]"
     fi
   else
     if [ $percent -le 20 ] ; then
-      echo -e "#[bg=colour196]#[fg=colour015] ${percent}% (${time}) #[default]"
+      echo -e "#[bg=colour001] ${percent}% (${time}) #[default]"
     else
-      echo -e "#[bg=colour027]#[fg=colour015] ${percent}% (${time}) #[default]"
+      echo -e "#[bg=colour004] ${percent}% (${time}) #[default]"
     fi
   fi
 else
-  echo -e "#[bg=colour082]#[fg=black] ${percent}% #[default]"
+  echo -e "#[bg=colour04] ${percent}% #[default]"
 fi

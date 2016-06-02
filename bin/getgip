@@ -1,7 +1,7 @@
 A=`curl ifconfig.io -m 5`
 
 if [ -n "$A" ]; then
-   echo "#[bg=colour030]#[fg=colour255] G:$A #[default]"
+   echo "#[bg=colour006]#[fg=colour000] G:$A #[default]"
 else
    echo ""
    exit 1

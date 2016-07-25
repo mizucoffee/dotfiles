@@ -8,8 +8,9 @@ echo " /_/  \_\/_/"
 
 export CLICOLOR=1
 export TERM=xterm-256color
-export PATH=":/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin::/usr/local/sbin:$PATH"
 source ~/.enhancd/enhancd.sh
+export LC_CTYPE=ja_JP.UTF-8
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
@@ -86,8 +87,10 @@ function v(){
 
 alias sshot=$ANDROID_SDK"/tools/screenshot2 ~/Desktop/screenshot.png; open ~/Desktop/screenshot.png";
 alias uninstallapp='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
+alias sshHome="ssh ritsuki@192.168.51.50 -p 2222"
 alias ls='ls -G -F'
 alias la='ls -a'
+alias g='git add . ; git commit ; git push'
 
 ########################################
 #------------- オプション -------------#
@@ -126,3 +129,7 @@ if [[ ! -n $TMUX ]]; then
   fi
 fi
 
+[[ -d ~/.rbenv  ]] && \
+  export PATH=${HOME}/.rbenv/bin:${PATH} && \
+  eval "$(rbenv init -)"
+    

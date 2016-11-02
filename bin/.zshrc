@@ -3,8 +3,8 @@ echo "Customized by"
 echo "     __  __  _____"
 echo "    / /_/ / / ___ \\"
 echo "   /   __/ / /__/ /"
-echo "  / /\ \  / _____/"
-echo " /_/  \_\/_/"
+echo "  / /\\ \\  / _____/"
+echo " /_/  \\_\\/_/"
 
 export CLICOLOR=1
 export TERM=xterm-256color
@@ -62,34 +62,18 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 function gip() {
     ~/Documents/GitPeco/GitPeco.sh
-}
+  }
 alias 'gip'
 
-function s(){
-    if [ $# -eq 0 ]; then
-        cat > /tmp/tmux.tmp && tmux split-window "less /tmp/tmux.tmp"
-    else
-        REATTACH_TO_USER_NAMESPACE=`whence reattach-to-user-namespace`
-        tmux split-window "$REATTACH_TO_USER_NAMESPACE $*"
-    fi
-}
-function v(){
-    if [ $# -eq 0 ]; then
-        cat > /tmp/tmux.tmp && tmux split-window -h "less /tmp/tmux.tmp"
-    else
-        REATTACH_TO_USER_NAMESPACE=`whence reattach-to-user-namespace`
-        tmux split-window -h "$REATTACH_TO_USER_NAMESPACE $*"
-    fi
-}
 ########################################
 #------------- エイリアス -------------#
 ########################################
 
-alias sshot=$ANDROID_SDK"/tools/screenshot2 ~/Desktop/screenshot.png; open ~/Desktop/screenshot.png";
-alias uninstallapp='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
-alias sshHome="ssh ritsuki@192.168.51.50 -p 2222"
+alias sshHome="ssh ritsuki@192.168.50.50 -i ~/.ssh/id_rsa -p 2222"
+alias sshConoha="ssh ritsuki@192.168.50.51 -i ~/.ssh/id_rsa -p 2222"
+alias arch="docker start -a -i arch"
 alias ls='ls -G -F'
-alias la='ls -a'
+alias la='ls -al'
 alias g='git add . ; git commit ; git push'
 
 ########################################
@@ -112,24 +96,28 @@ setopt prompt_subst
 ########################################
 
 if [[ ! -n $TMUX ]]; then
-  # get the IDs
-  ID="`tmux list-sessions`"
-  if [[ -z "$ID" ]]; then
-    tmux new-session && exit
+  tmux list-sessions > /dev/null 2>&1
+  if [ $? = 0 ]; then
+    ID="`tmux list-sessions`"
+  else
+    ID=""
   fi
+
   create_new_session="Create New Session"
-  ID="$ID\n${create_new_session}:"
+  no_use_tmux="No Use Tmux"
+  ID="$ID\n${create_new_session}:\n${no_use_tmux}:"
   ID="`echo $ID | peco | cut -d: -f1`"
   if [[ "$ID" = "${create_new_session}" ]]; then
     tmux new-session && exit
+  elif [[ "$ID" = "No Use Tmux" ]]; then
+    :
   elif [[ -n "$ID" ]]; then
     tmux attach-session -t "$ID" && exit
   else
-    :  # Start terminal normally
+    :
   fi
 fi
 
 [[ -d ~/.rbenv  ]] && \
   export PATH=${HOME}/.rbenv/bin:${PATH} && \
   eval "$(rbenv init -)"
-    

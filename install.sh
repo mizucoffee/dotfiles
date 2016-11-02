@@ -22,5 +22,7 @@ fi
 cd ~/
 
 git clone https://github.com/b4b4r07/enhancd
-mv enhancd .enhancd
+mv enhancd ~/.enhancd
 
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh

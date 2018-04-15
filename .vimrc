@@ -24,6 +24,7 @@ set laststatus=2
 set statusline=%F%r%h%=
 set nocompatible
 set noswapfile
+set clipboard=unnamed,autoselect
 
 set nohlsearch
 set incsearch
@@ -41,7 +42,8 @@ set whichwrap=b,s,<,>,[,],,~
 
 noremap <C-K><C-K> :source ~/.vimrc <CR>
 map     <C-n>      :NERDTreeToggle  <CR>
-autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
+" autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
+autocmd BufRead,BufNewFile *.ejs set filetype=html
 
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
@@ -69,7 +71,6 @@ call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('Yggdroot/indentLine')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
-call dein#add('scrooloose/syntastic')
 
 call dein#end()
 filetype plugin indent on

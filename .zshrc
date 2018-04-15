@@ -11,8 +11,6 @@ export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$PATH"
 export EDITOR=vim
 
 eval "$(anyenv init -)"
-source ~/.zplug/init.zsh
-source ~/.zplug/repos/b4b4r07/enhancd/init.sh
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
@@ -91,19 +89,5 @@ setopt prompt_subst
 setopt nonomatch
 setopt share_history # 複数端末での履歴を共有
 
-########################################
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-zplug load
-
-eval "$(anyenv init -)"
-
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "peco/peco", as:command, from:gh-r
+cd ~/working_dir
 

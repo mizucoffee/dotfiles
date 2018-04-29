@@ -98,8 +98,8 @@ do
     echo "" > ~/.speed
   fi
 
-  tx='{"color":"#ff9999","markup":"none","full_text":"↑ '`echo $speed | awk '{print $7" "$8}'`'"},'
-  rx='{"color":"#9999ff","markup":"none","full_text":"↓ '`echo $speed | awk '{print $2" "$3}'`'"},'
+  tx='{"color":"#ff9999","markup":"none","full_text":"'`echo $speed | awk '{print $7" "$8}'`'"},'
+  rx='{"color":"#9999ff","markup":"none","full_text":"'`echo $speed | awk '{print $2" "$3}'`'"},'
 
   echo "[$gip$lip$wifi$tx$rx$rom$mem$ac$bat_pr_1$bat_pr_2$date$vol],"
 done

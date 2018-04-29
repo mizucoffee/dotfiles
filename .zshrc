@@ -1,13 +1,15 @@
 clear
-echo "Welcome to Zsh!"
-echo "This computer is"
-figlet `hostname`
+echo
+#echo "Welcome to Zsh!"
+#echo "This computer is"
+#figlet `hostname`
+neofetch
 
 # amixer set Capture cap > /dev/null 2>&1
 
 export CLICOLOR=1
 export TERM=xterm-256color
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$(yarn global bin):$PATH"
 export EDITOR=vim
 
 eval "$(anyenv init -)"
@@ -59,6 +61,14 @@ function _update_vcs_info_msg() {
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
+function peco-history-selection() {
+    BUFFER=`history -n 1 | awk '!a[$0]++' | fzf --tac`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^H' peco-history-selection
 ########################################
 #---------------- Alias ---------------#
 ########################################
@@ -69,6 +79,7 @@ alias g='git add . ; git commit ; git push'
 alias pacman='sudo pacman'
 alias vi='vim'
 alias pbcopy='xsel --clipboard --input'
+alias rm='trash-put'
 
 ########################################
 #--------------- Option ---------------#
@@ -90,4 +101,6 @@ setopt nonomatch
 setopt share_history # 複数端末での履歴を共有
 
 cd ~/working_dir
+bindkey -e
 
+bindkey "e[2~" delete-char

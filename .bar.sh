@@ -1,5 +1,6 @@
 echo '{"version":1}'
 echo "["
+sh ~/.battery.sh &
 while true
 do
 # cat /sys/class/power_supply/BAT1/capacity
@@ -89,6 +90,16 @@ do
   fi
 
   mem='{"color":"#999999","markup":"none","full_text":"'`free -h | grep Mem | awk '{print $3"/"$2}'`'"},'
-  rom='{"color":"#bbbbbb","markup":"none","full_text":"'`df -h | grep "sda6" | awk '{print $3"/"$2}'`'"},'
-  echo "[$gip$lip$wifi$rom$mem$ac$bat_pr_1$bat_pr_2$date$vol],"
+  rom='{"color":"#bbbbbb","markup":"none","full_text":"'`df -h | grep "sdb7" | awk '{print $3"/"$2}'`'"},'
+
+  speed_tmp=`cat ~/.speed -A | sed -e 's/\^\[\[1G\^\[\[2K/\n/g' | sed -e 's/\^\@//g' | grep rx | tac | sed -n '1p' | grep rx`
+  if [ $? -eq 0 ]; then
+    speed=$speed_tmp
+    echo "" > ~/.speed
+  fi
+
+  tx='{"color":"#ff9999","markup":"none","full_text":"↑ '`echo $speed | awk '{print $7" "$8}'`'"},'
+  rx='{"color":"#9999ff","markup":"none","full_text":"↓ '`echo $speed | awk '{print $2" "$3}'`'"},'
+
+  echo "[$gip$lip$wifi$tx$rx$rom$mem$ac$bat_pr_1$bat_pr_2$date$vol],"
 done

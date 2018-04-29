@@ -29,7 +29,7 @@ font pango:monospace 8,FontAwesome 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindcode 198 exec --no-startup-id i3-msg restart
+bindcode 198 kill
 bindcode 156 exec gnome-terminal
 
 # start a terminal
@@ -164,8 +164,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindsym Print exec --no-startup-id scrot
-bindsym XF86ScreenSaver exec --no-startup-id kill -9 -1
+bindsym Print exec --no-startup-id scrot -e 'mv $f ~/working_dir/screen_shot'
+bindsym XF86ScreenSaver exec --no-startup-id dm-tool lock
 
 #bindsym --release $mod+space exec --no-startup-id toggleime
 
@@ -174,6 +174,5 @@ bindsym XF86ScreenSaver exec --no-startup-id kill -9 -1
 exec --no-startup-id nm-applet
 exec --no-startup-id xset r rate 300 35
 exec --no-startup-id feh --bg-scale /usr/share/backgrounds/wallpaper.jpg
-#exec --no-startup-id 
 
 bindsym --release $mod+x exec --no-startup-id toggleime

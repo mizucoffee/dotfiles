@@ -49,12 +49,12 @@ function _pre_cmd() {
   LANG=en_US.UTF-8 vcs_info
   RPROMPT="${vcs_info_msg_0_}"
   grep $TTY ~/.zsh_status > /dev/null && grep -v $TTY ~/.zsh_status | sed '/^$/d' > ~/.zsh_status_tmp && mv ~/.zsh_status_tmp ~/.zsh_status
-  echo $TTY `pwd` >> ~/.zsh_status
+  echo $TTY `pwd` `date +%s` >> ~/.zsh_status
 }
 
 function _set_pwd() {
   grep $TTY ~/.zsh_status > /dev/null && grep -v $TTY ~/.zsh_status | sed '/^$/d' > ~/.zsh_status_tmp && mv ~/.zsh_status_tmp ~/.zsh_status
-  echo $TTY `pwd` >> ~/.zsh_status
+  echo $TTY `pwd` `date +%s` >> ~/.zsh_status
 }
 
 function _zsh_exit() {

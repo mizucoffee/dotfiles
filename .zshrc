@@ -1,7 +1,7 @@
 clear
 echo
 neofetch
-cd ~/working_dir/example/
+cd ~/working_dir/
 
 export CLICOLOR=1
 export TERM=xterm-256color
@@ -22,7 +22,6 @@ bindkey "e[2~" delete-char
 autoload -Uz colors
 autoload -Uz select-word-style
 autoload -Uz compinit
-autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
 

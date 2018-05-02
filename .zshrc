@@ -83,7 +83,7 @@ bindkey '^H' his
 
 ########################################
 
-alias ls='/opt/coreutils/bin/ls -AGFh --color=auto'
+alias ls='ls -AGFh --color=auto'
 alias la='ls -al'
 alias g='git add . ; git commit ; git push'
 alias vi='vim'
@@ -110,6 +110,7 @@ setopt share_history # 複数端末での履歴を共有
 
 if uname -a | grep ARCH > /dev/null ; then
   alias pbcopy='xsel --clipboard --input'
+  alias ls='/opt/coreutils/bin/ls -AGFh --color=auto'
   alias pacman='sudo pacman'
   export TERMINAL="gnome-terminal"
 elif uname -a | grep Darwin > /dev/null ; then

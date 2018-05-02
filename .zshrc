@@ -88,7 +88,6 @@ alias la='ls -al'
 alias g='git add . ; git commit ; git push'
 alias pacman='sudo pacman'
 alias vi='vim'
-alias pbcopy='xsel --clipboard --input'
 alias rm='trash-put'
 alias rls='gnome-terminal --profile=ls -- ~/.rls.sh $TTY'
 

@@ -86,10 +86,9 @@ bindkey '^H' his
 alias ls='/opt/coreutils/bin/ls -AGFh --color=auto'
 alias la='ls -al'
 alias g='git add . ; git commit ; git push'
-alias pacman='sudo pacman'
 alias vi='vim'
 alias rm='trash-put'
-alias rls='gnome-terminal --profile=ls -- ~/.rls.sh $TTY'
+alias rls='$TERMINAL --profile=ls -- ~/.rls.sh $TTY'
 
 ########################################
 
@@ -107,3 +106,26 @@ setopt correct # コマンドミスを指摘
 setopt prompt_subst
 setopt nonomatch
 setopt share_history # 複数端末での履歴を共有
+
+
+if uname -a | grep ARCH > /dev/null ; then
+  alias pbcopy='xsel --clipboard --input'
+  alias pacman='sudo pacman'
+  export TERMINAL="gnome-terminal"
+elif uname -a | grep Darwin > /dev/null ; then
+  export TERMINAL="osascript - "$@" <<EOF
+on run argv
+tell application "iTerm"
+    activate
+    set new_term to (create window with default profile)
+    tell new_term
+        tell the current session
+            repeat with arg in argv
+               write text arg
+            end repeat
+        end tell
+    end tell
+end tell
+end run
+EOF"
+fi

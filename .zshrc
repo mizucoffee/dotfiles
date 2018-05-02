@@ -15,7 +15,6 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 bindkey -e
-bindkey "e[2~" delete-char
 
 ########################################
 

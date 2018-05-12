@@ -84,7 +84,6 @@ bindkey '^H' his
 
 ########################################
 
-alias ls='ls -AGFh --color=auto'
 alias la='ls -al'
 alias g='git add . ; git commit ; git push'
 alias vi='nvim'
@@ -116,6 +115,7 @@ if uname -a | grep ARCH > /dev/null ; then
   alias pacman='sudo pacman'
   export TERMINAL="gnome-terminal"
 elif uname -a | grep Darwin > /dev/null ; then
+  alias ls="ls -AGh"
   export TERMINAL="osascript - "$@" <<EOF
 on run argv
 tell application "iTerm"

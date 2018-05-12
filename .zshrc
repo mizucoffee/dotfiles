@@ -6,7 +6,8 @@ cd ~/working_dir/
 export CLICOLOR=1
 export TERM=xterm-256color
 export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$(yarn global bin):$PATH"
-export EDITOR=vim
+export EDITOR=nvim
+export XDG_CONFIG_HOME=~/.config
 
 eval "$(anyenv init -)"
 
@@ -86,7 +87,8 @@ bindkey '^H' his
 alias ls='ls -AGFh --color=auto'
 alias la='ls -al'
 alias g='git add . ; git commit ; git push'
-alias vi='vim'
+alias vi='nvim'
+alias vim='nvim'
 alias rm='trash-put'
 alias rls='$TERMINAL --profile=ls -- ~/.rls.sh $TTY'
 

@@ -115,7 +115,7 @@ if uname -a | grep ARCH > /dev/null ; then
   alias pacman='sudo pacman'
   export TERMINAL="gnome-terminal"
 elif uname -a | grep Darwin > /dev/null ; then
-  alias ls="ls -AGh"
+  alias ls="ls -Gh"
   export TERMINAL="osascript - "$@" <<EOF
 on run argv
 tell application "iTerm"

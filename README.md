@@ -8,9 +8,14 @@ My dotfiles for Arch Linux
 - neofetch
 - anyenv
 - xsel
-- vim (with lua) ... pacman -S gvim lua
+- neovim
 - ls-icons
 - trash-cli
+- fzf
+- font-awesome
+- xorg-xbacklight
+- feh
+- vnstat
 
 # License
 [MIT](http://kawakawaritsuki.mit-license.org) (c) [@KawakawaRitsuki](http://github.com/KawakawaRitsuki)

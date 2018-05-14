@@ -5,11 +5,12 @@ cd ~/working_dir/
 
 export CLICOLOR=1
 export TERM=xterm-256color
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$(yarn global bin):$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+export PATH="$(yarn global bin):$PATH"
 export EDITOR=nvim
 export XDG_CONFIG_HOME=~/.config
 
-eval "$(anyenv init -)"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000

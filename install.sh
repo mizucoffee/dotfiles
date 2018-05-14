@@ -10,5 +10,6 @@ mkdir -p ~/.config/nvim/
 mkdir -p ~/.config/i3/
 ln -s -f `pwd`/.config/nvim/init.vim ~/.config/nvim/
 ln -s -f `pwd`/.config/i3/config ~/.config/i3/config
+ln -s -f `pwd`/syncpw /usr/local/bin/syncpw
 
 chsh -s /usr/bin/zsh $USER

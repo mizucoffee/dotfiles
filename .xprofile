@@ -3,3 +3,5 @@ export XMODIFIERS=@im=uim
 export QT_IM_MODULE=uim
 uim-xim &
 setxkbmap -option ctrl:nocaps
+xinput --set-prop 13 'libinput Accel Speed' -1
+xinput --set-prop 12 'Device Enabled' 0

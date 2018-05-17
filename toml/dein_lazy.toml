@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = 'javascript'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+

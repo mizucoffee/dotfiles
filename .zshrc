@@ -1,6 +1,8 @@
 clear
 echo
 neofetch
+
+if [ ! -d ~/working_dir/ ]; then; mkdir -p ~/working_dir/ ; fi
 cd ~/working_dir/
 
 export CLICOLOR=1
@@ -90,7 +92,7 @@ alias g='git add . ; git commit ; git push'
 alias vi='nvim'
 alias vim='nvim'
 alias rm='trash-put'
-alias rls='$TERMINAL --profile=ls -- ~/.rls.sh $TTY'
+alias rls='$TERMINAL -q --profile=ls -- ~/.rls.sh $TTY'
 
 ########################################
 

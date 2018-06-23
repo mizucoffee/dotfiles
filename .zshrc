@@ -114,8 +114,14 @@ setopt share_history # 複数端末での履歴を共有
 
 if uname -a | grep ARCH > /dev/null ; then
   alias pbcopy='xsel --clipboard --input'
-  alias ls='/opt/coreutils/bin/ls -GFh --color=auto'
-  alias pacman='sudo pacman'
+  if [ -e /opt/coreutils/bin/ls ]; then
+    alias ls='/opt/coreutils/bin/ls -GFh --color=auto'
+  else
+    alias ls='ls -GFh --color=auto'
+  fi
+  if [ $USER != "root" ]; then
+    alias pacman='sudo pacman'
+  fi
   export TERMINAL="gnome-terminal"
 elif uname -a | grep Darwin > /dev/null ; then
   alias ls="ls -Gh"

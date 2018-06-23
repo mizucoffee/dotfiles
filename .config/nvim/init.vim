@@ -29,10 +29,6 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endif
 
-if dein#check_install(['vimproc.vim'])
-  call dein#install(['vimproc.vim'])
-endif
-
 if dein#check_install()
   call dein#install()
 endif

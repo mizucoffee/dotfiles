@@ -90,7 +90,7 @@ do
   fi
 
   mem='{"color":"#999999","markup":"none","full_text":"'`free -h | grep Mem | awk '{print $3"/"$2}'`'"},'
-  rom='{"color":"#bbbbbb","markup":"none","full_text":"'`df -h | grep "sda8" | awk '{print $3"/"$2}'`'"},'
+  rom='{"color":"#bbbbbb","markup":"none","full_text":"'`df -h | grep "sda9" | awk '{print $3"/"$2}'`'"},'
 
   speed_tmp=`cat ~/.speed -A | sed -e 's/\^\[\[1G\^\[\[2K/\n/g' | sed -e 's/\^\@//g' | grep rx | tac | sed -n '1p' | grep rx`
   if [ $? -eq 0 ]; then

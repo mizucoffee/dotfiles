@@ -8,8 +8,8 @@ cd ~/working_dir/
 export CLICOLOR=1
 export TERM=xterm-256color
 export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$PATH"
-if [ $(hash anyenv) ]; then; eval "$(anyenv init -)"; fi
-if [ $(hash yarn)]; then; export PATH="$(yarn global bin):$PATH"; fi
+if $(hash anyenv >& /dev/null); then; eval "$(anyenv init -)"; fi
+if $(hash yarn >& /dev/null); then; export PATH="$(yarn global bin):$PATH"; fi
 export EDITOR=nvim
 export XDG_CONFIG_HOME=~/.config
 

@@ -24,6 +24,7 @@ if [ $FORCE -eq 1 ]; then
   ln -s -f `pwd`/.gtkrc-2.0 ~/
   ln -s -f `pwd`/.xprofile ~/
   ln -s -f `pwd`/.config/i3/config ~/.config/i3/config
+  ln -s -f `pwd`/.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 fi
 
 mkdir -p ~/.config/nvim/

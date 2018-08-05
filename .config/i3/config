@@ -175,6 +175,6 @@ bindsym XF86ScreenSaver exec --no-startup-id dm-tool lock
 
 exec --no-startup-id nm-applet
 exec --no-startup-id xset r rate 300 35
-exec --no-startup-id feh --bg-scale /usr/share/backgrounds/wallpaper.png
+exec --no-startup-id feh --bg-scale /usr/share/backgrounds/wallpaper.jpg
 
 bindsym --release $mod+x exec --no-startup-id toggleime

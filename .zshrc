@@ -112,7 +112,7 @@ setopt nonomatch
 setopt share_history # 複数端末での履歴を共有
 
 
-if uname -a | grep ARCH > /dev/null ; then
+if type pacman > /dev/null ; then
   alias pbcopy='xsel --clipboard --input'
   if [ -e /opt/coreutils/bin/ls ]; then
     alias ls='/opt/coreutils/bin/ls -GFh --color=auto'

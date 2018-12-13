@@ -13,7 +13,7 @@ do
 
   remain=`acpi | awk '{print $5}' | sed '/^$/d'`
 
-  ac_st=`cat /sys/class/power_supply/AC/online`
+  ac_st=`cat /sys/class/power_supply/ADP1/online`
 
   if [ $ac_st -eq 0 ] ; then
     ac='{"color":"#9999ff","markup":"none","full_text":""},'
@@ -51,18 +51,18 @@ do
 
   wifi_raw="$(nmcli d show wlp3s0)"
 
-  if $(nmcli d show wlp3s0 | grep "GENERAL.STATE" | grep "20" > /dev/null) ; then
+  if $(nmcli d show wlp2s0 | grep "GENERAL.STATE" | grep "20" > /dev/null) ; then
     wifi='{"color":"#FF3333","markup":"none","full_text":"Disabled"},'
-  elif $(nmcli d show wlp3s0 | grep "GENERAL.STATE" | grep "30" > /dev/null) ; then
+  elif $(nmcli d show wlp2s0 | grep "GENERAL.STATE" | grep "30" > /dev/null) ; then
     wifi='{"color":"#FF7722","markup":"none","full_text":"Disconnected"},'
-  elif $(nmcli d show wlp3s0 | grep "GENERAL.STATE" | grep "50" > /dev/null) ; then
+  elif $(nmcli d show wlp2s0 | grep "GENERAL.STATE" | grep "50" > /dev/null) ; then
     wifi='{"color":"#FFFF00","markup":"none","full_text":"Connecting"},'
-  elif $(nmcli d show wlp3s0 | grep "GENERAL.STATE" | grep "100" > /dev/null) ; then
-    ssid=`nmcli d show wlp3s0 | grep "GENERAL.CONNECTION" | awk -F ":" '{print $2}' | sed -e 's/^[ ]*//g'`
+  elif $(nmcli d show wlp2s0 | grep "GENERAL.STATE" | grep "100" > /dev/null) ; then
+    ssid=`nmcli d show wlp2s0 | grep "GENERAL.CONNECTION" | awk -F ":" '{print $2}' | sed -e 's/^[ ]*//g'`
     wifi='{"color":"#44FF44","markup":"none","full_text":"'$ssid'"},'
   fi
 
-  l=`nmcli d show wlp3s0 | grep "IP4.ADDRESS" | awk -F ":" '{print $2}' | sed -e 's/^[ ]*//g'`
+  l=`nmcli d show wlp2s0 | grep "IP4.ADDRESS" | awk -F ":" '{print $2}' | sed -e 's/^[ ]*//g'`
   if [ "$LocalIP" != "$l" ]; then
     LocalIP=$l
     GlobalIP=`curl ifconfig.io -m 1`
@@ -90,7 +90,7 @@ do
   fi
 
   mem='{"color":"#999999","markup":"none","full_text":"'`free -h | grep Mem | awk '{print $3"/"$2}'`'"},'
-  rom='{"color":"#bbbbbb","markup":"none","full_text":"'`df -h | grep "sda9" | awk '{print $3"/"$2}'`'"},'
+  rom='{"color":"#bbbbbb","markup":"none","full_text":"'`df -h | grep "sdb4" | awk '{print $3"/"$2}'`'"},'
 
   speed_tmp=`cat ~/.speed -A | sed -e 's/\^\[\[1G\^\[\[2K/\n/g' | sed -e 's/\^\@//g' | grep rx | tac | sed -n '1p' | grep rx`
   if [ $? -eq 0 ]; then

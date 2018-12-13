@@ -1,5 +1,5 @@
 #!/bin/bash
-vnstat -l -i wlp3s0 > ~/.speed&
+vnstat -l -i wlp2s0 > ~/.speed&
 while true
 do
   if [ `cat /sys/class/power_supply/AC/online` -eq 0 -a `cat /sys/class/power_supply/BAT0/capacity` -le 20 ] ; then

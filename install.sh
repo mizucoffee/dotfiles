@@ -27,9 +27,11 @@ if [ $FORCE -eq 1 ]; then
   ln -s -f `pwd`/.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 fi
 
-mkdir -p ~/.config/nvim/
+mkdir -p ~/.config/nvim/toml
 ln -s -f `pwd`/.zshrc ~/
 ln -s -f `pwd`/.config/nvim/init.vim ~/.config/nvim/
+ln -s -f `pwd`/.config/nvim/toml/dein.toml ~/.config/nvim/toml/
+ln -s -f `pwd`/.config/nvim/toml/dein_lazy.toml ~/.config/nvim/toml/
 
 #ln -s -f `pwd`/syncpw /usr/local/bin/syncpw
 

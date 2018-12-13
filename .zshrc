@@ -1,3 +1,7 @@
+export ZIPINFOOPT="-OCP932"
+export UNZIPOPT="-OCP932"
+
+
 clear
 echo
 neofetch
@@ -88,7 +92,7 @@ bindkey '^H' his
 ########################################
 
 alias la='ls -al'
-alias g='git add . ; git commit ; git push'
+alias g="git add -A; git commit; git push origin \`git symbolic-ref --short HEAD\`"
 alias vi='nvim'
 alias vim='nvim'
 alias rm='trash-put'

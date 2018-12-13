@@ -24,6 +24,10 @@ if dein#load_state(s:dein_dir)
   call dein#add('Shougo/neosnippet')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('dracula/vim')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('digitaltoad/vim-pug')
+  call dein#add('elzr/vim-json')
+  call dein#add('kawakawaritsuki/vim-sus')
 
   call dein#end()
   call dein#save_state()
@@ -76,6 +80,8 @@ set endofline
 
 autocmd BufRead,BufNewFile *.ejs set filetype=html
 
+set conceallevel=0
+let g:vim_json_syntax_conceal = 0
 
 filetype plugin indent on
 color dracula

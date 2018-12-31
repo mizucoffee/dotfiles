@@ -27,7 +27,9 @@ if dein#load_state(s:dein_dir)
   call dein#add('leafgarland/typescript-vim')
   call dein#add('digitaltoad/vim-pug')
   call dein#add('elzr/vim-json')
-  call dein#add('kawakawaritsuki/vim-sus')
+  call dein#add('mizucoffee/vim-sus')
+  call dein#add('vim-syntastic/syntastic')
+  call dein#add('januswel/prettier.vim')
 
   call dein#end()
   call dein#save_state()
@@ -82,6 +84,28 @@ autocmd BufRead,BufNewFile *.ejs set filetype=html
 
 set conceallevel=0
 let g:vim_json_syntax_conceal = 0
+
+" ESLint configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_error_symbol = 'e'
+let g:syntastic_style_error_symbol = 'se'
+let g:syntastic_warning_symbol = 'sw'
+let g:syntastic_style_warning_symbol = 'w'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
 filetype plugin indent on
 color dracula

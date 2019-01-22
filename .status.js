@@ -39,12 +39,15 @@ while (true) {
       const ipv4 = stat.filter(s => s.match(/IP4.ADDRESS\[1\]/))[0]
       const ipv6 = stat.filter(s => s.match(/IP6.ADDRESS\[1\]/))[0]
       const status = stat.filter(s => s.match(/GENERAL.STATE/))[0]
-      
+
       return list
     },[])
 
-  const body = [...power_ac, ...power_bat, date]
+  const memory = { color: '#999999', full_text: `${execSync('free -h | grep Mem | awk \'{print $3"/"$2}\'').toString().replace(/\n/,"")}` }
+  const system_disk = execSync('mount | grep " / " | awk \'{print $1}\'').toString().replace(/\n/,"")
+  const rom = { color: '#999999', full_text: `${execSync(`df -h | grep ${system_disk} | awk \'{print $3"/"$2}\'`).toString().replace(/\n/,"")}` }
+
+  const body = [rom, memory, ...power_ac, ...power_bat, date]
 
   console.log(JSON.stringify(body) + ',')
-  // console.log(new Date().toJSON())
 }

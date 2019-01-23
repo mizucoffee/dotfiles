@@ -3,5 +3,5 @@ export XMODIFIERS=@im=uim
 export QT_IM_MODULE=uim
 uim-xim &
 setxkbmap -option ctrl:nocaps
-xinput --set-prop $(xinput | grep TrackPoint | awk '{print $6}' | cut -c 4-) 'libinput Accel Speed' -1
+xinput --set-prop $(xinput | grep TrackPoint | awk '{print $6}' | cut -c 4-) 'libinput Accel Speed' -0.5
 #xinput --set-prop $(xinput | grep TouchPad | awk '{print $6}' | cut -c 4-) 'Device Enabled' 0

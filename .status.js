@@ -35,7 +35,7 @@ function getMemFree() {
 function getSysFree() {
   const system_disk = execSync('mount | grep " / " | awk \'{print $1}\'').toString().replace(/\n/,"")
   const sys_disk_free = execSync(`df -h | grep ${system_disk} | awk \'{print $3"/"$2}\'`).toString().replace(/\n/,"")
-  return { color: '#bbbbbb', full_text: `${sys_disk_free}` }
+  return { color: '#bbbbbb', full_text: `${sys_disk_free}` }
 }
 
 function getWifiStatus() {

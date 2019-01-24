@@ -175,7 +175,7 @@ function battery() {
     })
     .every(p => p <= 20)
 
-  if(!ac || bat)
+  if(!ac && bat)
     execSync('amixer set Capture toggle')
   else
     execSync('amixer set Capture cap')

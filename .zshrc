@@ -1,7 +1,3 @@
-export ZIPINFOOPT="-OCP932"
-export UNZIPOPT="-OCP932"
-
-
 clear
 echo
 neofetch
@@ -12,11 +8,13 @@ cd ~/working_dir/
 export CLICOLOR=1
 export TERM=xterm-256color
 export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$PATH"
-if $(hash anyenv >& /dev/null); then; eval "$(anyenv init -)"; fi
-if $(hash yarn >& /dev/null); then; export PATH="$(yarn global bin):$PATH"; fi
 export EDITOR=nvim
 export XDG_CONFIG_HOME=~/.config
+export ZIPINFOOPT="-OCP932"
+export UNZIPOPT="-OCP932"
 
+if $(hash anyenv >& /dev/null); then; eval "$(anyenv init -)"; fi
+if $(hash yarn >& /dev/null); then; export PATH="$(yarn global bin):$PATH"; fi
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
@@ -114,7 +112,6 @@ setopt correct # コマンドミスを指摘
 setopt prompt_subst
 setopt nonomatch
 setopt share_history # 複数端末での履歴を共有
-
 
 if type pacman > /dev/null ; then
   alias pbcopy='xsel --clipboard --input'

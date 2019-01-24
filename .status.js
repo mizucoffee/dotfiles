@@ -69,7 +69,7 @@ function getIPv4(stat) {
 
 function getIPv6(stat) {
   const ipv6_raw = stat.filter(s => s.match(/IP6.ADDRESS\[1\]/))[0]
-    if(!ipv6_raw) return null
+  if(!ipv6_raw) return null
   const ipv6 = ipv6_raw.split(/\s+/)[1]
   return { color: '#CCCCFF', full_text: `${ipv6}` }
 }
@@ -106,33 +106,29 @@ function getVolume() {
   return { color: isMute ? '#ff3333' : '#9999ff', full_text: `${isMute ? 'M' : volume}` }
 }
 
-function getRx() {
+let prevRxTx = []
+function getRxTx() {
   let data = []
   try {
-    data = fs.readFileSync(`${require('os').homedir()}/.speed`, 'utf8')
+    data = execSync(`cat ${require('os').homedir()}/.speed`)
+      .toString()
       .split('[2K')
       .filter(l => l.indexOf('rx') > -1)[0]
       .split(/\s+/)
+
+    execSync(`echo "" > ${require('os').homedir()}/.speed`)
   } catch(e) {}
 
-  if(data.length == 0) return null
-  return { color: '#ff9999', full_text: `${data[2]}${data[3]}` }
+  if(data.length != 0) {
+    prevRxTx = [
+      { color: '#ff9999', full_text: `${data[7]}${data[8]}` },
+      { color: '#9999ff', full_text: `${data[2]}${data[3]}` }
+    ]
+  }
+  return prevRxTx
 }
 
-function getTx() {
-  let data = []
-  try {
-    data = fs.readFileSync(`${require('os').homedir()}/.speed`, 'utf8')
-      .split('[2K')
-      .filter(l => l.indexOf('rx') > -1)[0]
-      .split(/\s+/)
-  } catch(e) {}
-
-  if(data.length == 0) return null
-  return { color: '#9999ff', full_text: `${data[7]}${data[8]}` }
-}
-
-exec(`vnstat -l -i $(nmcli d | grep wifi | awk '{print $1}') > ~/.speed&`)
+exec(`vnstat -l -i $(nmcli d | grep wifi | awk '{print $1}') > ~/.speed`)
 
 console.log('{"version":1}')
 console.log('[')
@@ -145,8 +141,7 @@ function main() {
     getIPv6(wifi),
     getIPv4(wifi),
     getSSID(wifi),
-    getRx(),
-    getTx(),
+    ...getRxTx(),
     getSysFree(),
     getMemFree(),
     ...getPowerAC(),

@@ -15,6 +15,7 @@ if [ $(whoami) = "root" -a $FORCE -ne 1 ]; then
 fi
 
 mkdir -p ~/.config/nvim/toml
+ln -s -f `pwd`/.zlogin ~/
 ln -s -f `pwd`/.zshrc ~/
 ln -s -f `pwd`/.rls.sh ~/
 ln -s -f `pwd`/.status.js ~/

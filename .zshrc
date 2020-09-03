@@ -2,16 +2,12 @@ clear
 echo
 neofetch
 
-if [ ! -d ~/working_dir/ ]; then; mkdir -p ~/working_dir/ ; fi
-cd ~/working_dir/
-
 export CLICOLOR=1
 export TERM=xterm-256color
 export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.anyenv/bin:$PATH"
+export PATH_TO_FX=/Library/Java/JavaVirtualMachines/javafx-sdk-11.0.2/lib
 export EDITOR=nvim
 export XDG_CONFIG_HOME=~/.config
-export ZIPINFOOPT="-OCP932"
-export UNZIPOPT="-OCP932"
 
 if $(hash anyenv >& /dev/null); then; eval "$(anyenv init -)"; fi
 if $(hash yarn >& /dev/null); then; export PATH="$(yarn global bin):$PATH"; fi
@@ -91,6 +87,7 @@ bindkey '^H' his
 
 alias la='ls -al'
 alias g="git add -A; git commit; git push origin \`git symbolic-ref --short HEAD\`"
+alias gp="gitmoji -c && git push origin \`git symbolic-ref --short HEAD\`"
 alias vi='nvim'
 alias vim='nvim'
 alias rm='trash-put'
@@ -142,3 +139,4 @@ end tell
 end run
 EOF"
 fi
+export PATH="$PATH:/Users/mizucoffee/Library/Android/sdk/platform-tools"

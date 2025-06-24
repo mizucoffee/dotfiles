@@ -1,0 +1,32 @@
+#!/bin/bash
+
+CURRENT_BRANCH=$(git branch --show-current)
+CURRENT_NO="${CURRENT_BRANCH##*-}"
+BRANCH_PREFIX="${CURRENT_BRANCH%${CURRENT_BRANCH##*-}}"
+
+if [[ ! $CURRENT_NO =~ ^[0-9]+$ ]]; then
+  echo "ERROR: Invalid branch name"
+  exit 1
+fi
+
+NEXT_NO=$(expr "$CURRENT_NO" + 1)
+NEXT_BRANCH=${BRANCH_PREFIX}${NEXT_NO}
+
+git branch | grep ${NEXT_BRANCH} 2>&1
+
+if [ $? -ne 0 ]; then
+  echo "NOTICE: Next branch not found. git-chain-rebase finished."
+  exit 2
+fi
+
+git switch "$NEXT_BRANCH"
+git rebase "$CURRENT_BRANCH"
+
+if [ $? -ne 0 ]; then
+  echo "ERROR: Failed to rebase"
+  exit 3
+fi
+
+git push -f
+
+git-chain-rebase

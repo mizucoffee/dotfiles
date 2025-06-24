@@ -1,0 +1,4 @@
+#!/bin/bash
+
+BRANCH=$(git symbolic-ref --short HEAD)
+git branch -u origin/$BRANCH

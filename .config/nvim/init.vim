@@ -31,6 +31,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('vim-syntastic/syntastic')
   call dein#add('januswel/prettier.vim')
   call dein#add('udalov/kotlin-vim')
+  call dein#add('hashivim/vim-terraform')
 
   call dein#end()
   call dein#save_state()

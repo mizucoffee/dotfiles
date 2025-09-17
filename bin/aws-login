@@ -1,0 +1,56 @@
+#!/bin/bash
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  echo "USAGE"
+  echo "  aws-login"
+  echo "  aws-login <options>"
+  echo
+  echo "OPTIONS"
+  echo "  -h, --help   | Show help for command"
+  echo "  -c, --create | Create profile"
+  return
+fi
+
+LF='
+'
+
+if [ ! -f ~/.aws/config ]; then
+  PROFILE="<Add new profile>"
+else
+  PROFILE_LIST="$(cat ~/.aws/config | grep "\[profile" | sed -E 's/\[profile[[:space:]](.*)]/\1/')$LF<Add new profile>"
+
+  if [ -z "$PROFILE_LIST" ]; then
+    PROFILE="<Add new profile>"
+  else
+    PROFILE=$(echo "$PROFILE_LIST" | fzf)
+  fi
+
+  if [ -z "$PROFILE" ]; then
+    echo "Not selected"
+    return
+  fi
+fi
+
+if [ "$PROFILE" = "<Add new profile>" ]; then
+  echo "New profile name?"
+  read PROFILE
+  aws configure sso --profile $PROFILE
+  if [ $? -gt 0 ]; then
+    echo "Create profile failed"
+    return
+  fi
+fi
+
+aws sso login --profile $PROFILE
+AWS_CRED_FILE=$(find ~/.aws/sso/cache -name "*.json" -print0 | xargs -0 ls -t | awk "NR==1 {print}")
+
+ACCOUNT_ID=$(aws configure get sso_account_id --profile $PROFILE)
+ROLE_NAME=$(aws configure get sso_role_name --profile $PROFILE)
+AWS_ACCESS_TOKEN=$(cat $AWS_CRED_FILE | jq -r .accessToken)
+AWS_REGION=$(cat $AWS_CRED_FILE | jq -r .region)
+
+ROLE_CRED=$(aws sso get-role-credentials --account-id $ACCOUNT_ID --role-name $ROLE_NAME --access-token $AWS_ACCESS_TOKEN --region $AWS_REGION)
+
+export "AWS_ACCESS_KEY_ID=$(echo $ROLE_CRED | jq -r .roleCredentials.accessKeyId)"
+export "AWS_SECRET_ACCESS_KEY=$(echo $ROLE_CRED | jq -r .roleCredentials.secretAccessKey)"
+export "AWS_SESSION_TOKEN=$(echo $ROLE_CRED | jq -r .roleCredentials.sessionToken)"
